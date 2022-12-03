@@ -1,10 +1,9 @@
-import katie from "../images/katie-zaferes.png";
 import star from "../images/star.png";
 
 const Card = ({ img, rating, reviewCount, country, title, price }) => {
   return (
     <div className="card">
-      <div className="card--status">SOLD OUT</div>
+      {/* <div className="card--status">SOLD OUT</div> */}
       <img
         className="card--image"
         src={require(`../images/${img}`)}
@@ -13,7 +12,7 @@ const Card = ({ img, rating, reviewCount, country, title, price }) => {
       <div className="card--stats">
         <img className="card--star" src={star} alt="star" />
         <span>{rating}</span>
-        <span className="grey">{reviewCount} . </span>
+        <span className="grey">({reviewCount}) . </span>
         <span className="grey">{country}</span>
       </div>
 

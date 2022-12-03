@@ -45,11 +45,22 @@
   align-self: center;
 }
 
+.card--list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+}
+
 .card {
   width: 175px;
   font-size: 12px;
   padding: 20px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
 }
+
 .card--status {
   border-style: solid;
   display: flex;
@@ -69,19 +80,13 @@
 .card--image {
   width: 100%;
   border-radius: 9px;
+  margin-bottom: 9px;
 }
 .card--stats {
   display: flex;
   align-items: center;
 }
-.card--rating {
-}
+
 .card--star {
   height: 14px;
-}
-.card--rating_country {
-}
-.card--descrition {
-}
-.card--price {
 }
