@@ -87,3 +87,15 @@
 section {
   padding: 20px;
 }
+
+.search--container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.search--box {
+  padding: 10px;
+  width: 15em;
+  border-radius: 5px;
+}
