@@ -6,7 +6,7 @@ const Search = function ({ searchchange }) {
       <input
         className="search--box"
         type="search"
-        placeholder="search reviews"
+        placeholder="filter reviews"
         onChange={searchchange}
       />
     </div>

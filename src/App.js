@@ -36,9 +36,7 @@ function App() {
       <Navbar />
       <Search searchchange={onSearchChange} />
       <Hero />
-      <section className="card--list">
-        {<CardElements data={filterCards} />}
-      </section>
+      <div className="card--list">{<CardElements data={filterCards} />}</div>
     </div>
   );
 }
