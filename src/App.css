@@ -81,6 +81,15 @@
   border-radius: 2px;
   font-weight: bold;
 }
+
+.fa-bookmark {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  line-height: normal;
+  color: white;
+}
+
 .card--image {
   width: 100%;
   border-radius: 9px;

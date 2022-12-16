@@ -12,6 +12,8 @@ const CardElements = ({ data }) => {
     return (
       <div className="card">
         {badgeText && <div className="card--badge">{badgeText}</div>}
+        <i className="fa-regular fa-bookmark fa-2xl"></i>
+        {/* <i class="fa-solid fa-bookmark fa-2xl"></i> */}
         <img
           className="card--image"
           src={require(`../images/${el.coverImg}`)}
