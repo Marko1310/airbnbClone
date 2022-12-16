@@ -1,7 +1,22 @@
-import React from "react";
+import { React, useRef, useState } from "react";
 import star from "../images/star.png";
 
 const CardElements = ({ data }) => {
+  // State for the iconsClass
+  const [clicked, setClicked] = useState(false);
+
+  // Reference the bookmark icon
+  const elementRef = useRef();
+
+  function changeIcon() {
+    setClicked((prevClicked) => {
+      return !prevClicked;
+    });
+    const bookmarkIcon = elementRef.current;
+    bookmarkIcon.className = "none";
+    console.log(bookmarkIcon);
+  }
+
   return data.map((el) => {
     let badgeText;
 
@@ -10,9 +25,17 @@ const CardElements = ({ data }) => {
       : (badgeText = "SOLD OUT");
 
     return (
-      <div className="card">
+      <div key={el.id} className="card">
         {badgeText && <div className="card--badge">{badgeText}</div>}
-        <i className="fa-regular fa-bookmark fa-2xl"></i>
+        <i
+          ref={elementRef}
+          onClick={changeIcon}
+          className={
+            clicked
+              ? "fa-solid fa-bookmark fa-2xl"
+              : "fa-regular fa-bookmark fa-2xl"
+          }
+        ></i>
         {/* <i class="fa-solid fa-bookmark fa-2xl"></i> */}
         <img
           className="card--image"

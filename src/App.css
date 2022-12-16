@@ -90,6 +90,10 @@
   color: white;
 }
 
+.hidden {
+  display: none;
+}
+
 .card--image {
   width: 100%;
   border-radius: 9px;

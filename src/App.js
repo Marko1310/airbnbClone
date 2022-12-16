@@ -34,8 +34,8 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Search searchchange={onSearchChange} />
       <Hero />
+      <Search searchchange={onSearchChange} />
       <div className="card--list">{<CardElements data={filterCards} />}</div>
     </div>
   );
