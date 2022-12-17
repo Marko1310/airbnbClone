@@ -10,19 +10,64 @@ import { useState } from "react";
 //   return <Card key={el.id} element={el} />;
 // });
 
+// Upgrade the objects with a new propertie: clicked
+const upgradedObjects = data.map((el) => {
+  return { ...el, bookmarked: false };
+});
+
 function App() {
   const [cardstate, setCardState] = useState({
-    cards: data,
+    cards: upgradedObjects,
     searchfield: "",
+    checked: false,
   });
+
+  // create a state for bookmarked cards
+  const [bookmarkedCards, setBookmarkedCards] = useState([]);
+
+  // update state for bookmarked icon cards
+  function bookmarkCard(id) {
+    const newBookmarkedArray = cardstate.cards;
+    for (let i = 0; i < newBookmarkedArray.length; i++) {
+      if (newBookmarkedArray[i].id === id) {
+        newBookmarkedArray[i].bookmarked = !newBookmarkedArray[i].bookmarked;
+      }
+    }
+    setCardState({ cards: newBookmarkedArray, searchfield: "" });
+  }
+
+  // on checkbox click, change the state of cardstate: checked
+
+  // 1. filter the array and update the bookmarked state
+  const filterBookmarked = function (event) {
+    if (event.target.checked) {
+      const newFilteredBookmarkedArray = cardstate.cards.filter(
+        (el) => el.bookmarked
+      );
+      setCardState((prevcardstate) => {
+        return {
+          ...prevcardstate,
+          checked: true,
+        };
+      });
+      setBookmarkedCards(newFilteredBookmarkedArray);
+
+      // 2. just change the checked to false
+    } else {
+      setCardState((prevcardstate) => {
+        return {
+          ...prevcardstate,
+          checked: false,
+        };
+      });
+    }
+    console.log(event.target.checked);
+  };
 
   const onSearchChange = function (event) {
     setCardState((cardstate) => {
       return { ...cardstate, searchfield: event.target.value };
     });
-
-    console.log(filterCards);
-    console.log(cardstate.searchfield);
   };
 
   const filterCards = cardstate.cards.filter((cards) => {
@@ -35,8 +80,19 @@ function App() {
     <div>
       <Navbar />
       <Hero />
-      <Search searchchange={onSearchChange} />
-      <div className="card--list">{<CardElements data={filterCards} />}</div>
+      <Search
+        searchchange={onSearchChange}
+        filterBookmarked={filterBookmarked}
+      />
+      <div className="card--list">
+        {
+          // Choose what to send as a prop to render depending on cardstate.checked
+          <CardElements
+            data={cardstate.checked ? bookmarkedCards : filterCards}
+            bookmarkCard={bookmarkCard}
+          />
+        }
+      </div>
     </div>
   );
 }
