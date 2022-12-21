@@ -61,7 +61,6 @@ function App() {
         };
       });
     }
-    console.log(event.target.checked);
   };
 
   const onSearchChange = function (event) {
