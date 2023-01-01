@@ -27,12 +27,22 @@ function App() {
 
   // update state for bookmarked icon cards
   function bookmarkCard(id) {
-    const newBookmarkedArray = cardstate.cards;
-    for (let i = 0; i < newBookmarkedArray.length; i++) {
-      if (newBookmarkedArray[i].id === id) {
-        newBookmarkedArray[i].bookmarked = !newBookmarkedArray[i].bookmarked;
+    // Map version
+    const newBookmarkedArray = cardstate.cards.map(function (el, index) {
+      if (index + 1 === id) {
+        el.bookmarked = !el.bookmarked;
       }
-    }
+      return el;
+    });
+
+    // Loop Version
+    // const newBookmarkedArray = cardstate.cards;
+    // for (let i = 0; i < newBookmarkedArray.length; i++) {
+    //   if (newBookmarkedArray[i].id === id) {
+    //     newBookmarkedArray[i].bookmarked = !newBookmarkedArray[i].bookmarked;
+    //   }
+    // }
+
     setCardState({ cards: newBookmarkedArray, searchfield: "" });
   }
 
