@@ -90,7 +90,7 @@ function App() {
       <Navbar />
       <Hero />
       <Search
-        searchchange={onSearchChange}
+        searchChange={onSearchChange}
         filterBookmarked={filterBookmarked}
       />
       <div className="card--list">

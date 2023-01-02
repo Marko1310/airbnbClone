@@ -1,6 +1,6 @@
 import React from "react";
 
-const Search = function ({ searchchange, filterBookmarked }) {
+const Search = function ({ searchChange, filterBookmarked }) {
   return (
     <div className="search_and_bookmark_container">
       <div className="search--container">
@@ -8,7 +8,7 @@ const Search = function ({ searchchange, filterBookmarked }) {
           className="search--box"
           type="search"
           placeholder="filter reviews"
-          onChange={searchchange}
+          onChange={searchChange}
         />
       </div>
       <div className="bookmark--container">
