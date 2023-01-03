@@ -6,10 +6,6 @@ import Search from "./components/Search";
 import CardElements from "./components/CardElements";
 import { useState } from "react";
 
-// const CardElements = data.map((el) => {
-//   return <Card key={el.id} element={el} />;
-// });
-
 // Upgrade the objects with a new propertie: clicked
 const upgradedObjects = data.map((el) => {
   return { ...el, bookmarked: false };
@@ -18,9 +14,11 @@ const upgradedObjects = data.map((el) => {
 function App() {
   const [cardstate, setCardState] = useState({
     cards: upgradedObjects,
-    searchfield: "",
     checked: false,
   });
+
+  // create a state for searchfield
+  const [searchField, setSearchField] = useState("");
 
   // create a state for bookmarked cards
   const [bookmarkedCards, setBookmarkedCards] = useState([]);
@@ -74,15 +72,11 @@ function App() {
   };
 
   const onSearchChange = function (event) {
-    setCardState((cardstate) => {
-      return { ...cardstate, searchfield: event.target.value };
-    });
+    setSearchField(event.target.value);
   };
 
   const filterCards = cardstate.cards.filter((cards) => {
-    return cards.location
-      .toLowerCase()
-      .includes(cardstate.searchfield.toLowerCase());
+    return cards.location.toLowerCase().includes(searchField.toLowerCase());
   });
 
   return (
