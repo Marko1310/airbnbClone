@@ -12,13 +12,15 @@ const upgradedObjects = data.map((el) => {
 });
 
 function App() {
-  const [cardstate, setCardState] = useState({
-    cards: upgradedObjects,
-    checked: false,
-  });
+  const [cardstate, setCardState] = useState(upgradedObjects);
+
+  console.log(cardstate);
 
   // create a state for searchfield
   const [searchField, setSearchField] = useState("");
+
+  // create a state for bookmark tick
+  const [bookmarkTick, setBookmarkTick] = useState(false);
 
   // create a state for bookmarked cards
   const [bookmarkedCards, setBookmarkedCards] = useState([]);
@@ -26,7 +28,7 @@ function App() {
   // update state for bookmarked icon cards
   function bookmarkCard(id) {
     // Map version
-    const newBookmarkedArray = cardstate.cards.map(function (el, index) {
+    const newBookmarkedArray = cardstate.map(function (el, index) {
       if (index + 1 === id) {
         el.bookmarked = !el.bookmarked;
       }
@@ -41,7 +43,7 @@ function App() {
     //   }
     // }
 
-    setCardState({ cards: newBookmarkedArray, searchfield: "" });
+    setCardState(newBookmarkedArray);
   }
 
   // on checkbox click, change the state of cardstate: checked
@@ -49,25 +51,15 @@ function App() {
   // 1. filter the array and update the bookmarked state
   const filterBookmarked = function (event) {
     if (event.target.checked) {
-      const newFilteredBookmarkedArray = cardstate.cards.filter(
+      const newFilteredBookmarkedArray = cardstate.filter(
         (el) => el.bookmarked
       );
-      setCardState((prevcardstate) => {
-        return {
-          ...prevcardstate,
-          checked: true,
-        };
-      });
+      setBookmarkTick(true);
       setBookmarkedCards(newFilteredBookmarkedArray);
 
       // 2. just change the checked to false
     } else {
-      setCardState((prevcardstate) => {
-        return {
-          ...prevcardstate,
-          checked: false,
-        };
-      });
+      setBookmarkTick(false);
     }
   };
 
@@ -75,8 +67,8 @@ function App() {
     setSearchField(event.target.value);
   };
 
-  const filterCards = cardstate.cards.filter((cards) => {
-    return cards.location.toLowerCase().includes(searchField.toLowerCase());
+  const filterCards = cardstate.filter((card) => {
+    return card.location.toLowerCase().includes(searchField.toLowerCase());
   });
 
   return (
@@ -91,7 +83,7 @@ function App() {
         {
           // Choose what to send as a prop to render depending on cardstate.checked
           <CardElements
-            data={cardstate.checked ? bookmarkedCards : filterCards}
+            data={bookmarkTick ? bookmarkedCards : filterCards}
             bookmarkCard={bookmarkCard}
           />
         }
