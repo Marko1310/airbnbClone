@@ -14,8 +14,6 @@ const upgradedObjects = data.map((el) => {
 function App() {
   const [cardstate, setCardState] = useState(upgradedObjects);
 
-  console.log(cardstate);
-
   // create a state for searchfield
   const [searchField, setSearchField] = useState("");
 
@@ -46,7 +44,7 @@ function App() {
     setCardState(newBookmarkedArray);
   }
 
-  // on checkbox click, change the state of cardstate: checked
+  // on checkbox click, change the state of bookmarkTick: checked
 
   // 1. filter the array and update the bookmarked state
   const filterBookmarked = function (event) {
@@ -57,7 +55,7 @@ function App() {
       setBookmarkTick(true);
       setBookmarkedCards(newFilteredBookmarkedArray);
 
-      // 2. just change the checked to false
+      // 2. just change the bookmarkTick checked to false
     } else {
       setBookmarkTick(false);
     }
@@ -68,7 +66,19 @@ function App() {
   };
 
   const filterCards = cardstate.filter((card) => {
-    return card.location.toLowerCase().includes(searchField.toLowerCase());
+    //card filtered only by search query
+    const filteredCard = card.location
+      .toLowerCase()
+      .includes(searchField.toLowerCase());
+
+    // if bookmark is ticked and the card has bookmark propertie set to true, return only those cards that were filtered by search query
+    if (bookmarkTick && card.bookmarked) {
+      return filteredCard;
+
+      // if the bookmark tick is set off, only filter by search query
+    } else if (!bookmarkTick) {
+      return filteredCard;
+    }
   });
 
   return (
@@ -83,7 +93,8 @@ function App() {
         {
           // Choose what to send as a prop to render depending on cardstate.checked
           <CardElements
-            data={bookmarkTick ? bookmarkedCards : filterCards}
+            // data={bookmarkTick ? bookmarkedCards : filterCards}
+            data={filterCards}
             bookmarkCard={bookmarkCard}
           />
         }
