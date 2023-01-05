@@ -93,7 +93,7 @@
   transition: transform 0.2s;
 }
 
-.card:hover {
+.card--show--grid:hover {
   transform: scale(1.05);
 }
 
