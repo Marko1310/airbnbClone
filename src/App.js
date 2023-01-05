@@ -1,7 +1,8 @@
 import "./App.css";
+import data from "./data";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
-import data from "./data";
+import SideBar from "./components/SideBar";
 import Search from "./components/Search";
 import CardElements from "./components/CardElements";
 import { useState } from "react";
@@ -90,14 +91,12 @@ function App() {
         filterBookmarked={filterBookmarked}
       />
       <div className="card--list">
-        {
-          // Choose what to send as a prop to render depending on cardstate.checked
-          <CardElements
-            // data={bookmarkTick ? bookmarkedCards : filterCards}
-            data={filterCards}
-            bookmarkCard={bookmarkCard}
-          />
-        }
+        <div className="sidebar--container">
+          <SideBar />
+        </div>
+        <div className="card--list--container--list">
+          <CardElements data={filterCards} bookmarkCard={bookmarkCard} />
+        </div>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const CardElements = ({ data, bookmarkCard }) => {
       : (badgeText = "SOLD OUT");
 
     return (
-      <div key={el.id} className="card">
+      <div key={el.id} className="card--show--list">
         {badgeText && <div className="card--badge">{badgeText}</div>}
         <i
           id={el.id}
@@ -28,18 +28,20 @@ const CardElements = ({ data, bookmarkCard }) => {
           src={require(`../images/${el.coverImg}`)}
           alt="katie"
         />
-        <div className="card--stats">
-          <img className="card--star" src={star} alt="star" />
-          <span>{el.stats.rating}</span>
-          <span className="grey">({el.stats.reviewCount}) . </span>
-          <span className="grey">{el.country}</span>
-        </div>
+        <div className="stats--container--grid">
+          <div className="card--stats">
+            <img className="card--star" src={star} alt="star" />
+            <span>{el.stats.rating}</span>
+            <span className="grey">({el.stats.reviewCount}) . </span>
+            <span className="grey">{el.country}</span>
+          </div>
 
-        <p className="card--descrition">{el.title}</p>
-        <p className="card--price">
-          {" "}
-          <span className="bold">From ${el.price}</span> / person
-        </p>
+          <p className="card--descrition">{el.title}</p>
+          <p className="card--price">
+            {" "}
+            <span className="bold">From ${el.price}</span> / person
+          </p>
+        </div>
       </div>
     );
   });
