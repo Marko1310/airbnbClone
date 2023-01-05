@@ -57,7 +57,7 @@
   padding: 10px;
 }
 
-.card--list--container {
+.card--list--container--grid {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -83,8 +83,7 @@
   margin-right: auto;
 }
 
-.card {
-  transform: scale(1.2);
+.card--show--grid {
   width: 175px;
   font-size: 12px;
   flex: 0 0 auto;

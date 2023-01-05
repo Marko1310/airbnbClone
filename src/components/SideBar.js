@@ -1,12 +1,12 @@
 import React from "react";
 
-const SideBar = () => {
+const SideBar = ({ changeView }) => {
   return (
     <div className="sidebar">
       <div className="sidebar--buttons">
         <i
-          onClick={() => {
-            //   somefunction(el.id);
+          onClick={(event) => {
+            changeView(event);
           }}
           className="fa-solid fa-grip fa-2xl"
         ></i>
@@ -15,8 +15,8 @@ const SideBar = () => {
 
       <div className="sidebar--buttons">
         <i
-          onClick={() => {
-            //   somefunction(el.id);
+          onClick={(event) => {
+            changeView(event);
           }}
           className="fa-solid fa-list fa-xl"
         ></i>

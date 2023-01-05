@@ -24,6 +24,9 @@ function App() {
   // create a state for bookmarked cards
   const [bookmarkedCards, setBookmarkedCards] = useState([]);
 
+  // create state for grid and list view
+  const [view, setView] = useState("grid");
+
   // update state for bookmarked icon cards
   function bookmarkCard(id) {
     // Map version
@@ -82,6 +85,14 @@ function App() {
     }
   });
 
+  const changeView = function (e) {
+    if (e.target.classList.value.includes("grip")) {
+      setView("grid");
+    } else if (e.target.classList.value.includes("list")) {
+      setView("list");
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -92,10 +103,20 @@ function App() {
       />
       <div className="card--list">
         <div className="sidebar--container">
-          <SideBar />
+          <SideBar changeView={changeView} />
         </div>
-        <div className="card--list--container--list">
-          <CardElements data={filterCards} bookmarkCard={bookmarkCard} />
+        <div
+          className={
+            view === "grid"
+              ? "card--list--container--grid"
+              : "card--list--container--list"
+          }
+        >
+          <CardElements
+            data={filterCards}
+            bookmarkCard={bookmarkCard}
+            view={view}
+          />
         </div>
       </div>
     </div>

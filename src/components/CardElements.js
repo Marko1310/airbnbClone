@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import star from "../images/star.png";
 
-const CardElements = ({ data, bookmarkCard }) => {
+const CardElements = ({ data, bookmarkCard, view }) => {
   return data.map((el) => {
     let badgeText;
 
@@ -10,7 +10,10 @@ const CardElements = ({ data, bookmarkCard }) => {
       : (badgeText = "SOLD OUT");
 
     return (
-      <div key={el.id} className="card--show--list">
+      <div
+        key={el.id}
+        className={view === "grid" ? "card--show--grid" : "card--show--list"}
+      >
         {badgeText && <div className="card--badge">{badgeText}</div>}
         <i
           id={el.id}
@@ -28,7 +31,13 @@ const CardElements = ({ data, bookmarkCard }) => {
           src={require(`../images/${el.coverImg}`)}
           alt="katie"
         />
-        <div className="stats--container--grid">
+        <div
+          className={
+            view === "grid"
+              ? "stats--container--grid"
+              : "stats--container--list"
+          }
+        >
           <div className="card--stats">
             <img className="card--star" src={star} alt="star" />
             <span>{el.stats.rating}</span>
